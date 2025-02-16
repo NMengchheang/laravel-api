@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,8 +36,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/cart/count', [CartItemController::class, 'count']);
 });
 
-// Route::middleware('auth:sanctum')->group(function () {
-//     Route::get('cart-items', [CartItemController::class, 'index']);
-//     Route::post('cart-items', [CartItemController::class, 'store']);
-//     Route::put('cart-items/{cart_id}', [CartItemController::class, 'update']);
-// });
+Route::prefix('/mgt-user')->group(function () {
+    Route::get('/', [UserController::class,'index']);
+    Route::get('/id={id}', [UserController::class,'show']);
+    Route::put('/update-on-id={id}', [UserController::class,'update']);
+    Route::delete('/update-on-id={id}', [UserController::class, 'destroy']);
+});
